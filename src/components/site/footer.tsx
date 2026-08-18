@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { InstagramIcon } from "./instagram-icon";
+import { TikTokIcon } from "./tiktok-icon";
 import { Logo } from "./logo";
 import { primaryNav } from "@/lib/nav";
 
@@ -17,11 +18,22 @@ export function SiteFooter() {
             </p>
             <div className="flex items-center gap-3 pt-1">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/thewaggingpassport"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
               >
                 <InstagramIcon className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@thewaggingpassport"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+              >
+                <TikTokIcon className="h-4 w-4" />
               </a>
               <a
                 href="mailto:hello@thewaggingpassport.com"

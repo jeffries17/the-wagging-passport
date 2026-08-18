@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import type { HomePageContent } from "@/sanity/lib/types";
 
 const DEFAULTS = {
-  badge: "Real trips, taken with a 5-lb chihuahua named Tishka",
-  heading: "Traveling the world, one wagging passport at a time.",
+  badge: "Because traveling without the dog was never an option",
+  heading: "Sharing how little dogs can have big adventures.",
   subheading:
     "Honest guides on flying with your dog, finding hotels that are actually pet-friendly, and exploring destinations from Brazil to Japan — written from experience, not guesswork.",
   primaryCtaLabel: "Start With the Guides",
