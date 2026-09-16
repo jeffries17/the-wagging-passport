@@ -24,13 +24,13 @@ export default defineType({
       name: "body",
       title: "Body",
       type: "array",
-      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
+      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }, { type: "embed" }],
     }),
     defineField({
       name: "petTravelTips",
       title: "Pet Travel Tips",
       type: "array",
-      of: [{ type: "block" }],
+      of: [{ type: "block" }, { type: "embed" }],
       description: "Country-specific rules, quarantine info, vet contacts, etc.",
     }),
     defineField({

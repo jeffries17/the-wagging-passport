@@ -1,6 +1,7 @@
 import author from "./author";
 import contactPage from "./contactPage";
 import destination from "./destination";
+import embed from "./embed";
 import gearItem from "./gearItem";
 import homePage from "./homePage";
 import journalPage from "./journalPage";
@@ -18,4 +19,5 @@ export const schemaTypes = [
   journalPage,
   contactPage,
   seo,
+  embed,
 ];

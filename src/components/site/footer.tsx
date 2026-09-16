@@ -4,8 +4,29 @@ import { InstagramIcon } from "./instagram-icon";
 import { TikTokIcon } from "./tiktok-icon";
 import { Logo } from "./logo";
 import { primaryNav } from "@/lib/nav";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/sanity/lib/types";
 
-export function SiteFooter() {
+const PLATFORM_ICONS: Record<string, typeof InstagramIcon> = {
+  instagram: InstagramIcon,
+  tiktok: TikTokIcon,
+};
+
+const FALLBACK_SOCIAL = [
+  { platform: "instagram", url: "https://www.instagram.com/thewaggingpassport" },
+  { platform: "tiktok", url: "https://www.tiktok.com/@thewaggingpassport" },
+];
+
+export async function SiteFooter() {
+  const siteSettings = await sanityFetch<SiteSettings | null>({
+    query: siteSettingsQuery,
+    tags: ["siteSettings"],
+  });
+
+  const social = siteSettings?.social?.length ? siteSettings.social : FALLBACK_SOCIAL;
+  const contactEmail = siteSettings?.contactEmail || "hello@thewaggingpassport.com";
+
   return (
     <footer className="border-t border-border/80 bg-secondary/40">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
@@ -17,26 +38,24 @@ export function SiteFooter() {
               tow — from Caitlin and her chihuahua, Tishka.
             </p>
             <div className="flex items-center gap-3 pt-1">
+              {social.map((link) => {
+                const Icon = PLATFORM_ICONS[link.platform.toLowerCase()];
+                if (!Icon) return null;
+                return (
+                  <a
+                    key={link.platform}
+                    href={link.url}
+                    aria-label={link.platform}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
               <a
-                href="https://www.instagram.com/thewaggingpassport"
-                aria-label="Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.tiktok.com/@thewaggingpassport"
-                aria-label="TikTok"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
-              >
-                <TikTokIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="mailto:hello@thewaggingpassport.com"
+                href={`mailto:${contactEmail}`}
                 aria-label="Email"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-primary hover:text-primary"
               >

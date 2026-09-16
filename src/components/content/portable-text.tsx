@@ -5,6 +5,7 @@ import {
 } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { urlForImage } from "@/sanity/lib/image";
+import { InstagramEmbed } from "./instagram-embed";
 
 const components: PortableTextComponents = {
   types: {
@@ -19,6 +20,27 @@ const components: PortableTextComponents = {
             sizes="(min-width: 768px) 720px, 100vw"
             className="object-cover"
           />
+        </span>
+      );
+    },
+    embed: ({ value }) => {
+      if (/instagram\.com/.test(value.url)) {
+        return <InstagramEmbed url={value.url} caption={value.caption} />;
+      }
+      return (
+        <span className="my-8 block">
+          <iframe
+            src={value.url}
+            className="h-[450px] w-full rounded-xl border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+          {value.caption && (
+            <span className="mt-2 block text-sm text-muted-foreground">
+              {value.caption}
+            </span>
+          )}
         </span>
       );
     },

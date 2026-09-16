@@ -57,6 +57,7 @@ export default defineType({
         { type: "block" },
         { type: "image", options: { hotspot: true } },
         { type: "reference", to: [{ type: "gearItem" }], title: "Gear Mention" },
+        { type: "embed" },
       ],
     }),
     defineField({ name: "seo", title: "SEO", type: "seo" }),
